@@ -30,7 +30,7 @@ def mortgage_payment(principal, r = 6.952/(100*12), n = 12*30):
     return (p*(r*(1+r)**n)/((1+r)**n-1))*12
 
 reader = csv.DictReader(open('boston_residential_sales.csv'))
-new_fields = ['adjusted_price', 'adjusted_mortgage', 'down_payment', 'yearly_payments', 'first_year_payment']
+new_fields = ['adjusted_price', 'adjusted_mortgage', 'down_payment', 'yearly_payments', 'first_year_payment', 'sale_year']
 writer = csv.DictWriter(open('new_boston_residential_sales.csv', 'w'), fieldnames=reader.fieldnames+new_fields)
 writer.writeheader()
 for row in reader:
@@ -44,4 +44,5 @@ for row in reader:
     row['down_payment'] = str(int(down_payment(adjusted_price, adjusted_mortgage)))
     row['yearly_payments'] = str(int(mortgage_payment(adjusted_mortgage)))
     row['first_year_payment'] = str(int(mortgage_payment(adjusted_mortgage) + down_payment(adjusted_price, adjusted_mortgage)))
+    row['sale_year'] = sale_year
     writer.writerow(row)

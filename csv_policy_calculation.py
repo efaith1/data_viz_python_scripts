@@ -50,4 +50,4 @@ for row in reader:
     row['transfer_tax'] = transfer_tax
     yr = year_property
     while yr <= curr_year:
-    writer.writerow(row)
+        writer.writerow(row)
